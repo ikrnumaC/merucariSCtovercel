@@ -43,7 +43,7 @@ export default function FilterSort({ onSortChange, onFilterChange }: Props) {
   }
 
   return (
-    <div className="bg-white p-4 rounded-lg shadow mb-4">
+    <div className="bg-white p-4 rounded-lg shadow mb-4 w-full">
       <div className="grid grid-cols-2 gap-4">
         {/* ソートオプション */}
         <div>
