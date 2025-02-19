@@ -1,4 +1,4 @@
-// CardList.tsx
+'use client'
 import { useState, useEffect } from 'react';
 import FilterSort from './FilterSort';
 
@@ -15,9 +15,9 @@ type Item = {
 
 type FilterOption = {
   created_at?: { min: string; max: string };
-  price?: { min?: number; max?: number };
-  weekly_count?: { min?: number; max?: number };
-  monthly_count?: { min?: number; max?: number };
+  price?: { min?: number, max?: number };
+  weekly_count?: { min?: number, max?: number };
+  monthly_count?: { min?: number, max?: number };
 };
 
 type SortOption = {
@@ -75,14 +75,17 @@ export default function CardList() {
   if (error) return <div className="p-4 text-center text-red-500">{error}</div>;
 
   return (
-    <div className="max-w-7xl mx-auto p-4 font-sans">
-      <FilterSort onSortChange={setSort} onFilterChange={setFilter} />
+    <div className="max-w-7xl mx-auto p-4">
+      <FilterSort
+        onSortChange={setSort}
+        onFilterChange={setFilter}
+      />
 
       <div className="grid gap-4">
         {items.map((item, index) => (
           <div
             key={`${currentPage}-${index}`}
-            className="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-200 flex h-48 max-w-5xl mx-auto w-full"
+            className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 flex h-48 max-w-5xl mx-auto w-full"
           >
             {/* 左列：画像 */}
             <div className="w-1/3 h-full bg-gray-100">
@@ -109,7 +112,7 @@ export default function CardList() {
                       month: '2-digit',
                       day: '2-digit',
                       hour: '2-digit',
-                      minute: '2-digit',
+                      minute: '2-digit'
                     })}
                   </span>
                 </div>
@@ -119,13 +122,16 @@ export default function CardList() {
                   <span>
                     {item.min_price === item.max_price
                       ? `${item.min_price.toLocaleString()}円`
-                      : `${item.min_price.toLocaleString()}〜${item.max_price.toLocaleString()}円`}
+                      : `${item.min_price.toLocaleString()}〜${item.max_price.toLocaleString()}円`
+                    }
                   </span>
                 </div>
 
                 <div className="flex justify-between items-center">
                   <span className="text-sm text-gray-600">平均価格:</span>
-                  <span>{Math.floor((item.min_price + item.max_price) / 2).toLocaleString()}円</span>
+                  <span>
+                    {Math.floor((item.min_price + item.max_price) / 2).toLocaleString()}円
+                  </span>
                 </div>
 
                 <div className="flex justify-between items-center">
@@ -141,19 +147,25 @@ export default function CardList() {
       </div>
 
       <div className="mt-6">
-        <div className="text-center mb-2">{totalItems}件</div>
+        <div className="text-center mb-2">
+          {totalItems}件
+        </div>
         <div className="flex justify-center items-center gap-2 flex-wrap">
           <button
             onClick={() => setCurrentPage(1)}
             disabled={currentPage === 1 || loading}
-            className={`px-4 py-2 rounded text-sm ${
-              currentPage === 1 ? 'bg-blue-500 text-white' : 'bg-gray-100 hover:bg-gray-200'
+            className={`px-6 py-4 rounded text-lg ${
+              currentPage === 1 
+                ? 'bg-blue-500 text-white' 
+                : 'bg-gray-100 hover:bg-gray-200'
             } disabled:opacity-50`}
           >
-            最初
+            1
           </button>
 
-          {currentPage > 4 && <span className="px-4">...</span>}
+          {currentPage > 4 && (
+            <span className="px-4">...</span>
+          )}
 
           {[...Array(5)].map((_, i) => {
             const pageNum = currentPage - 2 + i;
@@ -163,8 +175,10 @@ export default function CardList() {
                 key={pageNum}
                 onClick={() => setCurrentPage(pageNum)}
                 disabled={currentPage === pageNum || loading}
-                className={`px-4 py-2 rounded text-sm ${
-                  currentPage === pageNum ? 'bg-blue-500 text-white' : 'bg-gray-100 hover:bg-gray-200'
+                className={`px-6 py-4 rounded text-lg ${
+                  currentPage === pageNum 
+                    ? 'bg-blue-500 text-white' 
+                    : 'bg-gray-100 hover:bg-gray-200'
                 } disabled:opacity-50`}
               >
                 {pageNum}
@@ -172,17 +186,21 @@ export default function CardList() {
             );
           })}
 
-          {currentPage < totalPages - 3 && <span className="px-4">...</span>}
+          {currentPage < totalPages - 3 && (
+            <span className="px-4">...</span>
+          )}
 
           {totalPages > 1 && (
             <button
               onClick={() => setCurrentPage(totalPages)}
               disabled={currentPage === totalPages || loading}
-              className={`px-4 py-2 rounded text-sm ${
-                currentPage === totalPages ? 'bg-blue-500 text-white' : 'bg-gray-100 hover:bg-gray-200'
+              className={`px-6 py-4 rounded text-lg ${
+                currentPage === totalPages 
+                  ? 'bg-blue-500 text-white' 
+                  : 'bg-gray-100 hover:bg-gray-200'
               } disabled:opacity-50`}
             >
-              最後
+              {totalPages}
             </button>
           )}
 
@@ -198,7 +216,7 @@ export default function CardList() {
                   setCurrentPage(value);
                 }
               }}
-              className="w-20 px-2 py-2 border rounded text-sm"
+              className="w-20 px-3 py-4 border rounded text-lg"
             />
             <span className="text-gray-600">/ {totalPages}</span>
           </div>
