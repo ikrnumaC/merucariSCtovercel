@@ -81,11 +81,11 @@ export default function CardList() {
         onFilterChange={setFilter}
       />
 
-      <div className="grid gap-4">
+      <div className="grid gap-4 max-w-5xl mx-auto">
         {items.map((item, index) => (
           <div
             key={`${currentPage}-${index}`}
-            className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 flex h-48 max-w-5xl mx-auto w-full"
+            className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 flex h-48 w-full"
           >
             {/* 左列：画像 */}
             <div className="w-1/3 h-full bg-gray-100">
