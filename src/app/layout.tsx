@@ -1,5 +1,11 @@
-export default function Home() {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   return (
-    <CardList />
+    <html lang="ja">
+      <body className="bg-gray-50">{children}</body>
+    </html>
   )
 }
