@@ -76,8 +76,6 @@ export default function CardList() {
 
   return (
     <div className="w-[1000px] mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">メルカリSC</h1>
-      
       <FilterSort
         onSortChange={setSort}
         onFilterChange={setFilter}
