@@ -88,9 +88,9 @@ export default function CardList() {
           {items.map((item, index) => (
             <div
               key={`${currentPage}-${index}`}
-              className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 flex h-48 w-full"
+              className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 flex flex-row w-full p-4"
             >
-              <div className="w-1/3 h-full bg-gray-100">
+              <div className="w-1/6 h-32 bg-gray-100 mr-4 flex-shrink-0">
                 <img
                   src={item.image_url}
                   alt={item.name}
@@ -100,46 +100,42 @@ export default function CardList() {
                   }}
                 />
               </div>
-
-              <div className="w-2/3 p-4">
-                <h3 className="text-lg font-semibold mb-2">{item.name}</h3>
-
-                <div className="space-y-2">
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm text-gray-600">取得日:</span>
-                    <span>
-                      {new Date(item.created_at).toLocaleString('ja-JP', {
-                        year: 'numeric',
-                        month: '2-digit',
-                        day: '2-digit',
-                        hour: '2-digit',
-                        minute: '2-digit'
-                      })}
-                    </span>
+              
+              <div className="flex-grow flex flex-row items-center gap-4">
+                <div className="w-2/5">
+                  <h3 className="text-lg font-semibold line-clamp-2">{item.name}</h3>
+                  <div className="text-xs text-gray-600 mt-1">
+                    取得日: {new Date(item.created_at).toLocaleString('ja-JP', {
+                      year: 'numeric',
+                      month: '2-digit',
+                      day: '2-digit',
+                      hour: '2-digit',
+                      minute: '2-digit'
+                    })}
                   </div>
-
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm text-gray-600">販売価格:</span>
-                    <span>
-                      {item.min_price === item.max_price
-                        ? `${item.min_price.toLocaleString()}円`
-                        : `${item.min_price.toLocaleString()}〜${item.max_price.toLocaleString()}円`
-                      }
-                    </span>
+                </div>
+                
+                <div className="w-1/5 text-center">
+                  <div className="text-sm text-gray-600">販売価格</div>
+                  <div className="font-semibold">
+                    {item.min_price === item.max_price
+                      ? `${item.min_price.toLocaleString()}円`
+                      : `${item.min_price.toLocaleString()}〜${item.max_price.toLocaleString()}円`
+                    }
                   </div>
-
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm text-gray-600">平均価格:</span>
-                    <span>
-                      {Math.floor((item.min_price + item.max_price) / 2).toLocaleString()}円
-                    </span>
+                </div>
+                
+                <div className="w-1/5 text-center">
+                  <div className="text-sm text-gray-600">平均価格</div>
+                  <div className="font-semibold">
+                    {Math.floor((item.min_price + item.max_price) / 2).toLocaleString()}円
                   </div>
-
-                  <div className="flex justify-between items-center">
-                    <span className="text-sm text-gray-600">出品数:</span>
-                    <span>
-                      週間: {item.weekly_count.toLocaleString()}件 / 月間: {item.monthly_count.toLocaleString()}件
-                    </span>
+                </div>
+                
+                <div className="w-1/5 text-center">
+                  <div className="text-sm text-gray-600">出品数</div>
+                  <div className="font-semibold">
+                    週間: {item.weekly_count.toLocaleString()}件 / 月間: {item.monthly_count.toLocaleString()}件
                   </div>
                 </div>
               </div>
