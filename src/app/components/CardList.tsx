@@ -88,24 +88,14 @@ export default function CardList() {
           {items.map((item, index) => (
             <div
               key={`${currentPage}-${index}`}
-              className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 flex flex-row w-full p-4"
+              className="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 w-full p-4"
             >
-              <div className="w-1/6 h-32 bg-gray-100 mr-4 flex-shrink-0">
-                <img
-                  src={item.image_url}
-                  alt={item.name}
-                  className="w-full h-full object-contain"
-                  onError={(e) => {
-                    e.currentTarget.src = '/placeholder.png';
-                  }}
-                />
-              </div>
-              
-              <div className="flex-grow flex flex-row items-center gap-4">
-                <div className="w-2/5">
-                  <h3 className="text-lg font-semibold line-clamp-2">{item.name}</h3>
-                  <div className="text-xs text-gray-600 mt-1">
-                    取得日: {new Date(item.created_at).toLocaleString('ja-JP', {
+              <div className="flex flex-col">
+                {/* 商品名 - 上部に配置 */}
+                <div className="w-full mb-2">
+                  <h3 className="text-lg font-semibold">{item.name}</h3>
+                  <div className="text-sm text-gray-600">
+                    データ取得日: {new Date(item.created_at).toLocaleString('ja-JP', {
                       year: 'numeric',
                       month: '2-digit',
                       day: '2-digit',
@@ -114,28 +104,48 @@ export default function CardList() {
                     })}
                   </div>
                 </div>
-                
-                <div className="w-1/5 text-center">
-                  <div className="text-sm text-gray-600">販売価格</div>
-                  <div className="font-semibold">
-                    {item.min_price === item.max_price
-                      ? `${item.min_price.toLocaleString()}円`
-                      : `${item.min_price.toLocaleString()}〜${item.max_price.toLocaleString()}円`
-                    }
-                  </div>
+              </div>
+              
+              {/* 画像と情報の行 */}
+              <div className="flex flex-row mt-2">
+                {/* 画像 - 左側 */}
+                <div className="w-32 h-32 bg-gray-100 flex-shrink-0 flex items-center justify-center">
+                  <img
+                    src={item.image_url}
+                    alt={item.name}
+                    className="max-w-full max-h-full object-contain"
+                    onError={(e) => {
+                      e.currentTarget.src = '/placeholder.png';
+                    }}
+                  />
                 </div>
                 
-                <div className="w-1/5 text-center">
-                  <div className="text-sm text-gray-600">平均価格</div>
-                  <div className="font-semibold">
-                    {Math.floor((item.min_price + item.max_price) / 2).toLocaleString()}円
-                  </div>
-                </div>
-                
-                <div className="w-1/5 text-center">
-                  <div className="text-sm text-gray-600">出品数</div>
-                  <div className="font-semibold">
-                    週間: {item.weekly_count.toLocaleString()}件 / 月間: {item.monthly_count.toLocaleString()}件
+                {/* 情報セクション - 右側 */}
+                <div className="flex-grow pl-4 flex flex-col justify-center">
+                  <div className="grid grid-cols-1 gap-2">
+                    <div className="flex justify-between">
+                      <span className="text-sm text-gray-600">販売価格:</span>
+                      <span className="font-semibold">
+                        {item.min_price === item.max_price
+                          ? `${item.min_price.toLocaleString()}円`
+                          : `${item.min_price.toLocaleString()}〜${item.max_price.toLocaleString()}円`
+                        }
+                      </span>
+                    </div>
+                    
+                    <div className="flex justify-between">
+                      <span className="text-sm text-gray-600">平均価格:</span>
+                      <span className="font-semibold">
+                        {Math.floor((item.min_price + item.max_price) / 2).toLocaleString()}円
+                      </span>
+                    </div>
+                    
+                    <div className="flex justify-between">
+                      <span className="text-sm text-gray-600">出品数:</span>
+                      <span className="font-semibold">
+                        週間: {item.weekly_count.toLocaleString()}件 / 月間: {item.monthly_count.toLocaleString()}件
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
