@@ -76,16 +76,20 @@ export default function CardList() {
 
   return (
     <div className="min-h-screen bg-gray-50 flex justify-center">
-      <div className="w-full max-w-[1000px] p-4">
+      {/* メインコンテナの幅を調整し、中央寄せ */}
+      <div className="w-full max-w-[800px] p-4 flex flex-col items-center">
         <h1 className="text-2xl font-bold mb-4">メルカリSC</h1>
         
-        <FilterSort
-          onSortChange={setSort}
-          onFilterChange={setFilter}
-        />
+        {/* フィルターソート部分の幅を100%に設定 */}
+        <div className="w-full mb-4">
+          <FilterSort
+            onSortChange={setSort}
+            onFilterChange={setFilter}
+          />
+        </div>
 
-        {/* ここを修正: mx-autoでコンテナ自体を中央寄せし、max-w-3xlで幅を制限 */}
-        <div className="space-y-4 mx-auto max-w-3xl">
+        {/* カードリスト - 必要な幅を明示的に設定 */}
+        <div className="space-y-4 w-full">
           {items.map((item, index) => (
             <div
               key={`${currentPage}-${index}`}
@@ -157,7 +161,7 @@ export default function CardList() {
           ))}
         </div>
 
-        <div className="mt-6">
+        <div className="mt-6 w-full">
           <div className="text-center mb-2">
             {totalItems}件
           </div>
