@@ -84,7 +84,8 @@ export default function CardList() {
           onFilterChange={setFilter}
         />
 
-        <div className="space-y-4">
+        {/* ここを修正: mx-autoでコンテナ自体を中央寄せし、max-w-3xlで幅を制限 */}
+        <div className="space-y-4 mx-auto max-w-3xl">
           {items.map((item, index) => (
             <div
               key={`${currentPage}-${index}`}
