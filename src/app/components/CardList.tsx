@@ -71,12 +71,12 @@ export default function CardList() {
 
   const totalPages = Math.ceil(totalItems / itemsPerPage);
 
-  if (loading) return <div className="min-h-screen bg-gray-50"><div className="w-[1000px] mx-auto p-4 text-center">読み込み中...</div></div>;
-  if (error) return <div className="min-h-screen bg-gray-50"><div className="w-[1000px] mx-auto p-4 text-center text-red-500">{error}</div></div>;
+  if (loading) return <div className="min-h-screen bg-gray-50"><div className="w-full max-w-[1000px] mx-auto p-4 text-center">読み込み中...</div></div>;
+  if (error) return <div className="min-h-screen bg-gray-50"><div className="w-full max-w-[1000px] mx-auto p-4 text-center text-red-500">{error}</div></div>;
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="w-[1000px] mx-auto p-4">
+      <div className="w-full max-w-[1000px] mx-auto p-4">
         <h1 className="text-2xl font-bold mb-4">メルカリSC</h1>
         
         <FilterSort
