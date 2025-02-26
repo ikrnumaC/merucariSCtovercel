@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import FilterSort from './FilterSort';
 
 type Item = {
@@ -110,7 +110,7 @@ export default function CardList() {
                       src={item.image_url}
                       alt={item.name}
                       className="max-w-full max-h-full object-contain"
-                      onError={(e) => {
+                      onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
                         e.currentTarget.src = '/placeholder.png';
                       }}
                     />
@@ -225,7 +225,7 @@ export default function CardList() {
                 min={1}
                 max={totalPages}
                 value={currentPage}
-                onChange={(e) => {
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                   const value = parseInt(e.target.value);
                   if (value >= 1 && value <= totalPages) {
                     setCurrentPage(value);
